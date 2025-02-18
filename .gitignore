@@ -5,6 +5,11 @@
 data/
 *.pyc
 venv/
+pcdet/
+docker/
+docs/
+/setup.py
+/requirements.txt
 *.idea/
 *.so
 *.yaml
@@ -13,5 +18,5 @@ venv/
 *.pkl
 *.zip
 *.bin
-output
+output/
 version.py

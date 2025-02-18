@@ -17,6 +17,23 @@ from pcdet.datasets import build_dataloader
 from pcdet.models import build_network
 from pcdet.utils import common_utils
 
+import sys
+
+class StderrFilter:
+    def __init__(self, original_stderr):
+        self.original_stderr = original_stderr
+
+    def write(self, message):
+        if "WARNING" in message:
+            return
+        if message.strip() == "":
+            return
+        self.original_stderr.write(message)
+
+    def flush(self):
+        self.original_stderr.flush()
+
+sys.stderr = StderrFilter(sys.stderr)
 
 def parse_config():
     parser = argparse.ArgumentParser(description='arg parser')
@@ -60,7 +77,7 @@ def eval_single_ckpt(model, test_loader, args, eval_output_dir, logger, epoch_id
     model.load_params_from_file(filename=args.ckpt, logger=logger, to_cpu=dist_test, 
                                 pre_trained_path=args.pretrained_model)
     model.cuda()
-    
+
     # start evaluation
     eval_utils.eval_one_epoch(
         cfg, args, model, test_loader, epoch_id, logger, dist_test=dist_test,
@@ -158,6 +175,10 @@ def main():
     else:
         assert args.batch_size % total_gpus == 0, 'Batch size should match the number of gpus'
         args.batch_size = args.batch_size // total_gpus
+
+    # print("\n\n\n")
+    # print(f"Local Rank: {args.local_rank}, Total GPUs: {total_gpus}")
+    # print("\n\n\n")
 
     output_dir = cfg.ROOT_DIR / 'output' / cfg.EXP_GROUP_PATH / cfg.TAG / args.extra_tag
     output_dir.mkdir(parents=True, exist_ok=True)

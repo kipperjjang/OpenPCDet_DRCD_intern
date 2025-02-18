@@ -3,6 +3,7 @@ import argparse
 import datetime
 import glob
 import os
+import sys
 from pathlib import Path
 from test import repeat_eval_ckpt
 
@@ -17,6 +18,21 @@ from pcdet.utils import common_utils
 from train_utils.optimization import build_optimizer, build_scheduler
 from train_utils.train_utils import train_model
 
+class StderrFilter:
+    def __init__(self, original_stderr):
+        self.original_stderr = original_stderr
+
+    def write(self, message):
+        if "WARNING" in message:
+            return
+        if message.strip() == "":
+            return
+        self.original_stderr.write(message)
+
+    def flush(self):
+        self.original_stderr.flush()
+
+sys.stderr = StderrFilter(sys.stderr)
 
 def parse_config():
     parser = argparse.ArgumentParser(description='arg parser')

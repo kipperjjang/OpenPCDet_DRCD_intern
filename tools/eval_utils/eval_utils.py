@@ -1,5 +1,6 @@
 import pickle
 import time
+import re
 
 import numpy as np
 import torch
@@ -8,6 +9,9 @@ import tqdm
 from pcdet.models import load_data_to_gpu
 from pcdet.utils import common_utils
 
+def extract_between_underscores(text):
+    match = re.search(r'_(.*?).pth', text)
+    return match.group(1) if match else None
 
 def statistics_info(cfg, ret_dict, metric, disp_dict):
     for cur_thresh in cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST:
@@ -54,6 +58,8 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
 
     if cfg.LOCAL_RANK == 0:
         progress_bar = tqdm.tqdm(total=len(dataloader), leave=True, desc='eval', dynamic_ncols=True)
+
+    list_of_inference_time = np.empty(0)
     start_time = time.time()
     for i, batch_dict in enumerate(dataloader):
         load_data_to_gpu(batch_dict)
@@ -68,6 +74,9 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
 
         if getattr(args, 'infer_time', False):
             inference_time = time.time() - start_time
+
+            list_of_inference_time = np.append(list_of_inference_time, inference_time) # store inference_time in np.array
+
             infer_time_meter.update(inference_time * 1000)
             # use ms to measure inference time
             disp_dict['infer_time'] = f'{infer_time_meter.val:.2f}({infer_time_meter.avg:.2f})'
@@ -81,6 +90,10 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
         if cfg.LOCAL_RANK == 0:
             progress_bar.set_postfix(disp_dict)
             progress_bar.update()
+
+    print("\n\n inference time:")
+    print(list_of_inference_time)
+    print("\n\n\n")
 
     if cfg.LOCAL_RANK == 0:
         progress_bar.close()
@@ -119,8 +132,11 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
     logger.info('Average predicted number of objects(%d samples): %.3f'
                 % (len(det_annos), total_pred_objects / max(1, len(det_annos))))
 
-    with open(result_dir / 'result.pkl', 'wb') as f:
+    with open(result_dir / (extract_between_underscores(args.ckpt) + '_result' + '.pkl'), 'wb') as f:
         pickle.dump(det_annos, f)
+
+    # with open(result_dir / ('focalformer' + '_result' + '.pkl'), 'wb') as f:
+    #     pickle.dump(det_annos, f)
 
     result_str, result_dict = dataset.evaluation(
         det_annos, class_names,
