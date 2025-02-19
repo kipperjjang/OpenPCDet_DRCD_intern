@@ -329,9 +329,12 @@ Working directory : ~/OpenPCDet/tools
 
 ## cfgs modification info
 * Modifying cfgs files
+
 (1) Open "cbgs_..._model.yaml" 
+
 (2) Modify '_BASE_CONFIG_' & 'INFO_PATH'
     Names of INFO_PATH are in /v1.0_mini
+
 ```
 DATA_CONFIG:
     **_BASE_CONFIG_**: cfgs/dataset_configs/nuscenes_dataset.yaml
@@ -344,6 +347,7 @@ DATA_CONFIG:
 +) POINT_CLOUD_RANGE can be changed
 
 (3) Modify 'DB_INFO_PATH'
+    
     Name of DB_INFO_PATH is in /v1.0_mini 
 ```
 DATA_AUGMENTOR:
@@ -355,7 +359,9 @@ DATA_AUGMENTOR:
 ```
 
 * Modifyinh dataset_cfgs file
+
 (1) Open "nuscenes_dataset.yaml" in ~/OpenPCDet/cfgs/dataset_configs/
+
 (2) Modify 'DATA_PATH' & 'VERSION'
 ```
 DATASET: 'NuScenesDataset'
@@ -363,6 +369,7 @@ DATASET: 'NuScenesDataset'
 
 **VERSION**: 'v1.0-mini'
 ```
+
 (3) Modify 'INFO_PATH' & 'POINT_CLOUD_RANGE'(optional) & 'DB_INFO_PATH' same as above 'Modifying cgfs files'
 ```
 **INFO_PATH**: {
