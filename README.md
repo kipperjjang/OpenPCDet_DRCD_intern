@@ -332,7 +332,7 @@ Working directory : ~/OpenPCDet/tools
 
 (1) Open "cbgs_..._model.yaml" 
 
-(2) Modify '_BASE_CONFIG_' & 'INFO_PATH' \n Names of INFO_PATH are in /v1.0_mini
+(2) Modify '_BASE_CONFIG_' & 'INFO_PATH' <br> Names of INFO_PATH are in /v1.0_mini
 
 ```
 DATA_CONFIG:
@@ -345,7 +345,7 @@ DATA_CONFIG:
 ```
 +) POINT_CLOUD_RANGE can be changed
 
-(3) Modify 'DB_INFO_PATH' \n Name of DB_INFO_PATH is in /v1.0_mini 
+(3) Modify 'DB_INFO_PATH' <br> Name of DB_INFO_PATH is in /v1.0_mini 
 ```
 DATA_AUGMENTOR:
         DISABLE_AUG_LIST: ['placeholder']
