@@ -328,7 +328,7 @@ Working directory : ~/OpenPCDet/tools
 - visualize_2.py
 
 ## cfgs modification info
-* Modifying cfgs files
+### Modifying cfgs files
 
 (1) Open "cbgs_..._model.yaml" 
 
@@ -358,7 +358,7 @@ DATA_AUGMENTOR:
                 - nuscenes_dbinfos_10sweeps_withvelo.pkl
 ```
 
-* Modifyinh dataset_cfgs file
+### Modifyinh dataset_cfgs file
 
 (1) Open "nuscenes_dataset.yaml" in ~/OpenPCDet/cfgs/dataset_configs/
 
