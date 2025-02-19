@@ -289,3 +289,41 @@ If you find this project useful in your research, please consider cite:
 Welcome to be a member of the OpenPCDet development team by contributing to this repo, and feel free to contact us for any potential contributions. 
 
 
+## Configuration info
+Working directory : ~/OpenPCDet/tools
+- demo.py
+    
+    -cfg_file
+    cfgs/nuscenes_models/cbgs_voxel0075_voxelnext.yaml
+    --ckpt
+    ckpt/latest_model.pth
+    --data_path
+    sample/result.pkl
+    
+- train.py
+    
+    -cfg_file
+    cfgs/nuscenes_models/cbgs_voxel0075_voxelnext.yaml
+    
+- test.py
+    
+    (1) test만 진행.
+    
+    -cfg_file
+    cfgs/nuscenes_models/cbgs_voxel0075_voxelnext.yaml
+    --ckpt
+    ckpt/latest_model.pth
+    
+    (2) batch 변경 및 inference time 확인용 
+    
+    -cfg_file
+    cfgs/nuscenes_models/cbgs_voxel0075_voxelnext.yaml
+    --ckpt
+    ckpt/voxelnext_nuscenes_kernel1.pth
+    --infer_time
+    --batch_size
+    1
+    
+- visualize.py
+- visualize_2.py
+
