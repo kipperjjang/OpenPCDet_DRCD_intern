@@ -327,3 +327,57 @@ Working directory : ~/OpenPCDet/tools
 - visualize.py
 - visualize_2.py
 
+## cfgs modification info
+* Modifying cfgs files
+(1) Open "cbgs_..._model.yaml" 
+(2) Modify '_BASE_CONFIG_' & 'INFO_PATH'
+    Names of INFO_PATH are in /v1.0_mini
+```
+DATA_CONFIG:
+    **_BASE_CONFIG_**: cfgs/dataset_configs/nuscenes_dataset.yaml
+    **POINT_CLOUD_RANGE**: [-54.0, -54.0, -5.0, 54.0, 54.0, 3.0]
+    **INFO_PATH**: {
+        'train': [nuscenes_infos_10sweeps_train.pkl],
+        'test': [nuscenes_infos_10sweeps_val.pkl], 
+    }
+```
++) POINT_CLOUD_RANGE can be changed
+
+(3) Modify 'DB_INFO_PATH'
+    Name of DB_INFO_PATH is in /v1.0_mini 
+```
+DATA_AUGMENTOR:
+        DISABLE_AUG_LIST: ['placeholder']
+        AUG_CONFIG_LIST:
+            - NAME: gt_sampling
+              **DB_INFO_PATH**:
+                - nuscenes_dbinfos_10sweeps_withvelo.pkl
+```
+
+* Modifyinh dataset_cfgs file
+(1) Open "nuscenes_dataset.yaml" in ~/OpenPCDet/cfgs/dataset_configs/
+(2) Modify 'DATA_PATH' & 'VERSION'
+```
+DATASET: 'NuScenesDataset'
+**DATA_PATH**: '../data/nuscenes'
+
+**VERSION**: 'v1.0-mini'
+```
+(3) Modify 'INFO_PATH' & 'POINT_CLOUD_RANGE'(optional) & 'DB_INFO_PATH' same as above 'Modifying cgfs files'
+```
+**INFO_PATH**: {
+    'train': [nuscenes_infos_10sweeps_train.pkl],
+    'test': [nuscenes_infos_10sweeps_val.pkl],
+}
+
+**POINT_CLOUD_RANGE**: [-51.2, -51.2, -5.0, 51.2, 51.2, 3.0] # optional
+
+BALANCED_RESAMPLING: True 
+
+DATA_AUGMENTOR:
+    DISABLE_AUG_LIST: ['placeholder']
+    AUG_CONFIG_LIST:
+        - NAME: gt_sampling
+          **DB_INFO_PATH**:
+              - nuscenes_dbinfos_10sweeps_withvelo.pkl
+```
