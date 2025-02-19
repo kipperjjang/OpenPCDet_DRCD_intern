@@ -333,6 +333,7 @@ Working directory : ~/OpenPCDet/tools
 (1) Open "cbgs_..._model.yaml" 
 
 (2) Modify '_BASE_CONFIG_' & 'INFO_PATH'
+   
     Names of INFO_PATH are in /v1.0_mini
 
 ```
