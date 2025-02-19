@@ -358,7 +358,7 @@ DATA_AUGMENTOR:
                 - nuscenes_dbinfos_10sweeps_withvelo.pkl
 ```
 
-### Modifyinh dataset_cfgs file
+### Modifying dataset_cfgs file
 
 (1) Open "nuscenes_dataset.yaml" in ~/OpenPCDet/cfgs/dataset_configs/
 
