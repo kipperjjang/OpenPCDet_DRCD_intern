@@ -367,7 +367,7 @@ DATASET: 'NuScenesDataset'
 **VERSION**: 'v1.0-mini'
 ```
 
-(3) Modify 'INFO_PATH' & 'POINT_CLOUD_RANGE'(optional) & 'DB_INFO_PATH' same as above 'Modifying cgfs files'
+(3) Modify 'INFO_PATH' & 'POINT_CLOUD_RANGE'(optional) & 'DB_INFO_PATH' same as above 'Modifying cfgs files'
 ```
 **INFO_PATH**: {
     'train': [nuscenes_infos_10sweeps_train.pkl],
