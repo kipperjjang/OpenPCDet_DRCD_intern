@@ -334,7 +334,7 @@ Working directory : ~/OpenPCDet/tools
 
 (2) Modify '_BASE_CONFIG_' & 'INFO_PATH'
    
-    Names of INFO_PATH are in /v1.0_mini
+    : Names of INFO_PATH are in /v1.0_mini
 
 ```
 DATA_CONFIG:
@@ -349,7 +349,7 @@ DATA_CONFIG:
 
 (3) Modify 'DB_INFO_PATH'
     
-    Name of DB_INFO_PATH is in /v1.0_mini 
+    : Name of DB_INFO_PATH is in /v1.0_mini 
 ```
 DATA_AUGMENTOR:
         DISABLE_AUG_LIST: ['placeholder']
